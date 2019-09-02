@@ -1,0 +1,55 @@
+﻿
+@using SimplePoll_RestApi.Models
+@model NavPaging
+
+@{
+    Dictionary<string, object> HtmlAttributes = new Dictionary<string, object>();
+    HtmlAttributes.Add("class", "ActionBase PageNumbers");
+}
+<div>
+    @if (Model != null)
+    {
+
+        if (Model.PageIndex > 1)
+        {
+
+            Model.RouteValues.Remove("PageSize");
+            Model.RouteValues.Remove("PageIndex");
+            Model.RouteValues.Add("PageSize", Model.PageSize);
+            Model.RouteValues.Add("PageIndex", Model.PageIndex - 1);
+
+            @Html.ActionLink("<", Model.ActionName, Model.RouteValues, HtmlAttributes)
+
+        }
+
+        for (int i = 0; i < Model.PageTotal; i++)
+        {
+            int pageNumber = i + 1;
+
+            if (pageNumber == Model.PageIndex)
+            {
+                @Html.Label(pageNumber.ToString(), HtmlAttributes)
+            }
+            else
+            {
+                Model.RouteValues.Remove("PageSize");
+                Model.RouteValues.Remove("PageIndex");
+                Model.RouteValues.Add("PageSize", Model.PageSize);
+                Model.RouteValues.Add("PageIndex", pageNumber);
+                @Html.ActionLink(pageNumber.ToString(), Model.ActionName, Model.RouteValues, HtmlAttributes)
+            }
+        }
+
+        if (Model.PageIndex < Model.PageTotal)
+        {
+            Model.RouteValues.Remove("PageSize");
+            Model.RouteValues.Remove("PageIndex");
+            Model.RouteValues.Add("PageSize", Model.PageSize);
+            Model.RouteValues.Add("PageIndex", Model.PageIndex + 1);
+
+            @Html.ActionLink(">", Model.ActionName, Model.RouteValues, HtmlAttributes)
+        }
+
+    }
+</div>
+

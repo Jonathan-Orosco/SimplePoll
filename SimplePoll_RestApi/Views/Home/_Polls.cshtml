@@ -1,0 +1,35 @@
+﻿@using SimplePoll_DataLayer
+@model IEnumerable<Poll>
+
+
+<h2>Polls</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PollName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PollDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PollName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PollDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Take", "Take", new { PollId=item.PollId }) |
+        </td>
+    </tr>
+}
+
+</table>

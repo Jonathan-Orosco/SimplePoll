@@ -1,0 +1,46 @@
+﻿@using SimplePoll_DataLayer
+@using SimplePoll_RestApi.Models
+@model List<Poll>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Poll firstRecord = Model.FirstOrDefault();
+
+    NavPaging paging = new NavPaging();
+    paging.ActionName = "Employees";
+
+    if (firstRecord != null)
+    {
+        paging.PageTotal = firstRecord.PageTotal ?? 0;
+        paging.PageSize = firstRecord.PageSize ?? (byte)0;
+        paging.PageIndex = firstRecord.PageIndex ?? (short)0;
+    }
+    ViewBag.ActionName = Html.CurrentViewName();
+
+}
+<div>
+    @section Scripts {
+        <script type="text/javascript" src="~/Scripts/libs/runtime-es2015.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/polyfills-es2015.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/styles-es2015.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/vendor-es2015.js"></script>
+        <script type="text/javascript" src="~/Scripts/libs/main-es2015.js"></script>
+    }
+
+    <p>
+        @Html.Partial("_NavPaging", paging)
+    </p>
+
+    <div>
+        @Html.Partial("_Polls", Model)
+    </div>
+
+    <p>
+        @Html.Partial("_NavPaging", paging)
+    </p>
+</div>

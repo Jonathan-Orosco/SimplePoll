@@ -1,0 +1,131 @@
+﻿@using SimplePoll_DataLayer
+@model Poll
+
+@{
+    ViewBag.Title = "CreatePoll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreatePoll</h2>
+
+
+
+<div ng-app="CreatePoll" ng-controller="myController" class="form-horizontal">
+    <h4>Poll</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.PollName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PollName, new { htmlAttributes = new { ng_model = "Model.PollName", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PollName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PollDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PollDescription, new { htmlAttributes = new { ng_model = "Model.PollDescription", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PollDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Question.QuestionText, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Question.QuestionText, new { htmlAttributes = new { ng_model = "Model.Question.QuestionText", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Question.QuestionText, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <label>New Answer</label>
+    @Html.TextBox("AnswerText", null, new { ng_model = "AnswerText", @class = "form-control" })
+    <button ng-click="addRow()"> Add Row </button>
+    <button ng-click="removeRow()">Remove Row</button>
+    <ul>
+
+        @if (Model.Question.Answers.Count > 0)
+        {
+            foreach (Question_Answer answer in Model.Question.Answers)
+            {
+                <li ng-repeat="Answer in Model.Question.Answers">
+                    <span ng-bind="Answer.AnswerText"></span>
+
+                    <input type="checkbox" ng-model="Answer.Remove" />
+                </li>
+            }
+        }
+        else
+        {
+            <li ng-repeat="Answer in Model.Question.Answers">
+                <span ng-bind="Answer.AnswerText"></span>
+                <input type="checkbox" ng-model="Answer.Remove" />
+            </li>
+        }
+
+    </ul>
+    <button id="save" ng-disabled="isDisabled" ng-click="save()">Submit</button>
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+    var app = angular.module('CreatePoll', []);
+            app.controller('myController', function ($scope, $http) {
+
+        // JSON ARRAY TO POPULATE TABLE.
+        $scope.Model = @Html.Raw(Json.Encode(Model));
+
+        // GET VALUES FROM INPUT BOXES AND ADD A NEW ROW TO THE TABLE.
+        $scope.addRow = function () {
+            if ($scope.AnswerText != undefined) {
+                var answer = {};
+
+                answer.AnswerText = $scope.AnswerText;
+
+                $scope.Model.Question.Answers.push(answer);
+
+                // CLEAR TEXTBOX.
+                $scope.AnswerText = null;
+            }
+        };
+
+        // REMOVE SELECTED ROW(s) FROM TABLE.
+        $scope.removeRow = function () {
+            var arrMovie = [];
+            angular.forEach($scope.Model.Question.Answers, function (value) {
+                if (!value.Remove) {
+                    arrMovie.push(value);
+                }
+            });
+            $scope.Model.Question.Answers = arrMovie;
+        };
+
+        function CompletePoll() {
+            var request = {
+                method: 'post',
+                url: '@Url.Action("Create","Home")',
+                data: JSON.stringify($scope.Model),
+                dataType: 'json',
+                contentType: "application/json"
+            };
+
+            // POST DATA WITH $http.
+            $http(request)
+                .then(function (data) {
+                    window.location.href = '@Url.Action("Index", "Home")'
+                })
+                .error(function () {});
+    };
+        // FINALLY SUBMIT THE DATA.
+        $scope.save = function () {
+            CompletePoll()
+        };
+    });
+        </script>
+    }

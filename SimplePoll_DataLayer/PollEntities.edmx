@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SimplePollModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="TimeZones_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DisplayName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TimeZones_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TimeZoneId" Type="smallint" Mode="In" />
+          <Parameter Name="DisplayName" Type="nvarchar" Mode="In" />
+          <Parameter Name="OffsetMinutes" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="UserAgents_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserAgent" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Users_d_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="Users_d_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsDeleteAction" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Answers_d_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="AnswerId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="PollId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Answers_d_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="AnswerId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="QuestionId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AnswerText" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Answers_f_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="AnswerHeaderId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Answers_f_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="AnswerHeaderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="QuestionId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="AnswerId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Answers_Header_F_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="AnswerHeaderId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Answers_Header_F_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="AnswerHeaderId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="IpAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="TimeZoneId" Type="smallint" Mode="In" />
+          <Parameter Name="IsDstTime" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Info_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="PollId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Info_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PollId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="PollName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PollDescription" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Questions_d_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="PageSize" Type="tinyint" Mode="In" />
+          <Parameter Name="PageIndex" Type="smallint" Mode="In" />
+          <Parameter Name="QuestionId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="PollId" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="Questions_d_UpdateInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Poll">
+          <Parameter Name="QuestionId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="PollId" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="QuestionText" Type="nvarchar" Mode="In" />
+          <Parameter Name="QuestionValue" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="SimplePollModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SimplePollModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SimplePollEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Answers_d_Get" ReturnType="Collection(SimplePollModel.Question_Answer)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="AnswerId" Mode="In" Type="Guid" />
+            <Parameter Name="PollId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Answers_f_Get" ReturnType="Collection(SimplePollModel.Question_Answer_Response)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="AnswerHeaderId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Answers_Header_F_Get" ReturnType="Collection(SimplePollModel.Answers_Header)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="AnswerHeaderId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Info_Get" ReturnType="Collection(SimplePollModel.Poll)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="PollId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Questions_Get" ReturnType="Collection(SimplePollModel.Question)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="QuestionId" Mode="In" Type="Guid" />
+            <Parameter Name="PollId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="TimeZones_Save" ReturnType="Collection(Int16)">
+            <Parameter Name="TimeZoneId" Mode="In" Type="Int16" />
+            <Parameter Name="DisplayName" Mode="In" Type="String" />
+            <Parameter Name="OffsetMinutes" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="Users_d_Save" ReturnType="Collection(Int64)">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="IsDeleteAction" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Answers_d_Save" ReturnType="Collection(Guid)">
+            <Parameter Name="AnswerId" Mode="In" Type="Guid" />
+            <Parameter Name="QuestionId" Mode="In" Type="Guid" />
+            <Parameter Name="AnswerText" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Answers_f_Save" ReturnType="Collection(Int32)">
+            <Parameter Name="AnswerHeaderId" Mode="In" Type="Guid" />
+            <Parameter Name="QuestionId" Mode="In" Type="Guid" />
+            <Parameter Name="AnswerId" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="Answers_Header_F_Save" ReturnType="Collection(Guid)">
+            <Parameter Name="AnswerHeaderId" Mode="In" Type="Guid" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="IpAddress" Mode="In" Type="String" />
+            <Parameter Name="TimeZoneId" Mode="In" Type="Int16" />
+            <Parameter Name="IsDstTime" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Info_Save" ReturnType="Collection(Guid)">
+            <Parameter Name="PollId" Mode="In" Type="Guid" />
+            <Parameter Name="PollName" Mode="In" Type="String" />
+            <Parameter Name="PollDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Questions_d_Save" ReturnType="Collection(Guid)">
+            <Parameter Name="QuestionId" Mode="In" Type="Guid" />
+            <Parameter Name="PollId" Mode="In" Type="Guid" />
+            <Parameter Name="QuestionText" Mode="In" Type="String" />
+            <Parameter Name="QuestionValue" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="UserAgents_Save" ReturnType="Collection(Int32)">
+          <Parameter Name="UserAgent" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TimeZones_Get" ReturnType="Collection(SimplePollModel.User_TimeZone)">
+            <Parameter Name="DisplayName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Users_d_Get" ReturnType="Collection(SimplePollModel.Users_d_Select_Result)">
+            <Parameter Name="PageSize" Mode="In" Type="Byte" />
+            <Parameter Name="PageIndex" Mode="In" Type="Int16" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="User_Info">
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateUtc" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Question_Answer">
+          <Property Type="Guid" Name="AnswerId" Nullable="false" />
+          <Property Type="Guid" Name="QuestionId" Nullable="false" />
+          <Property Type="String" Name="AnswerText" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Question_Answer_Response">
+          <Property Type="Guid" Name="AnswerHeaderId" Nullable="false" />
+          <Property Type="Guid" Name="QuestionId" Nullable="false" />
+          <Property Type="Guid" Name="AnswerId" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Answers_Header">
+          <Property Type="Guid" Name="AnswerHeaderId" Nullable="false" />
+          <Property Type="Int64" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="IpAddress" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="TimeZoneId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDstTime" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="UserAgentId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Poll">
+          <Property Type="Guid" Name="PollId" Nullable="false" />
+          <Property Type="String" Name="PollName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PollDescription" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+          <Property Type="Byte" Name="PageSize" Nullable="true" />
+          <Property Type="Int16" Name="PageIndex" Nullable="true" />
+          <Property Type="Int32" Name="PageTotal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Question">
+          <Property Type="Guid" Name="QuestionId" Nullable="false" />
+          <Property Type="Guid" Name="PollId" Nullable="false" />
+          <Property Type="String" Name="QuestionText" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="QuestionValue" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="User_TimeZone">
+          <Property Type="Int16" Name="TimeZoneId" Nullable="false" />
+          <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="100" />
+          <Property Type="Int16" Name="OffsetMinutes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Users_d_Select_Result">
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="CreatedDateUtc" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="DeletedDateUtc" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SimplePollModelStoreContainer" CdmEntityContainer="SimplePollEntities" >
+          <FunctionImportMapping FunctionImportName="Answers_d_Get" FunctionName="SimplePollModel.Store.Answers_d_Get">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Question_Answer">
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Answers_f_Get" FunctionName="SimplePollModel.Store.Answers_f_Get">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Question_Answer_Response">
+                <ScalarProperty Name="AnswerHeaderId" ColumnName="AnswerHeaderId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Answers_Header_F_Get" FunctionName="SimplePollModel.Store.Answers_Header_F_Get">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Answers_Header">
+                <ScalarProperty Name="AnswerHeaderId" ColumnName="AnswerHeaderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="TimeZoneId" ColumnName="TimeZoneId" />
+                <ScalarProperty Name="IsDstTime" ColumnName="IsDstTime" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="UserAgentId" ColumnName="UserAgentId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Info_Get" FunctionName="SimplePollModel.Store.Info_Get">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Poll">
+                <ScalarProperty Name="PollId" ColumnName="PollId" />
+                <ScalarProperty Name="PollName" ColumnName="PollName" />
+                <ScalarProperty Name="PollDescription" ColumnName="PollDescription" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="PageSize" ColumnName="PageSize" />
+                <ScalarProperty Name="PageIndex" ColumnName="PageIndex" />
+                <ScalarProperty Name="PageTotal" ColumnName="PageTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Questions_Get" FunctionName="SimplePollModel.Store.Questions_d_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Question">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="PollId" ColumnName="PollId" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="QuestionValue" ColumnName="QuestionValue" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TimeZones_Save" FunctionName="SimplePollModel.Store.TimeZones_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Users_d_Save" FunctionName="SimplePollModel.Store.Users_d_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Answers_d_Save" FunctionName="SimplePollModel.Store.Answers_d_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Answers_f_Save" FunctionName="SimplePollModel.Store.Answers_f_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Answers_Header_F_Save" FunctionName="SimplePollModel.Store.Answers_Header_F_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Info_Save" FunctionName="SimplePollModel.Store.Info_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="Questions_d_Save" FunctionName="SimplePollModel.Store.Questions_d_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="UserAgents_Save" FunctionName="SimplePollModel.Store.UserAgents_UpdateInsert" />
+          <FunctionImportMapping FunctionImportName="TimeZones_Get" FunctionName="SimplePollModel.Store.TimeZones_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.User_TimeZone">
+                <ScalarProperty Name="TimeZoneId" ColumnName="TimeZoneId" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="OffsetMinutes" ColumnName="OffsetMinutes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Users_d_Get" FunctionName="SimplePollModel.Store.Users_d_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SimplePollModel.Users_d_Select_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CreatedDateUtc" ColumnName="CreatedDateUtc" />
+                <ScalarProperty Name="DeletedDateUtc" ColumnName="DeletedDateUtc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
